@@ -100,17 +100,17 @@ export OUTPUT_DIR=$OUTPUT_LOC
 
 ### This job calls the script call_fastq_split.sh, which has all the job submission information for fastq splitting with job name -J "Splitting of fastq":
 #bsub -We 24:00 -q c7normal -J "Fastq splitting" -o $OUTPUT_DIR/${JOB_PREFIX}_fastq_split_main.out $RUN_PATH/call_fastq_split.sh
-#bsub -We 24:00 -q priority -J "Fastq splitting" -o $OUTPUT_DIR/${JOB_PREFIX}_fastq_split_main.out $RUN_PATH/call_fastq_split.sh
+bsub -We 24:00 -q priority -J "Fastq splitting" -o $OUTPUT_DIR/${JOB_PREFIX}_fastq_split_main.out $RUN_PATH/call_fastq_split.sh
 
 ### This job calls the script call_trim_galore_bismark_alignment.sh, which further calls the script trim_galore_bismark_alignment.sh: 
 #bsub -w 'done("Fastq splitting")' -We 24:00 -q c7normal -J "Bismark and trim galore run for single-end fastq" -o $OUTPUT_DIR/${JOB_PREFIX}_bismarkrun_main.out $RUN_PATH/call_trim_galore_bismark_alignment.sh  
 bsub -We 24:00 -q priority -J "Bismark and trim galore run for single-end fastq" -o $OUTPUT_DIR/${JOB_PREFIX}_bismarkrun_main.out $RUN_PATH/call_trim_galore_bismark_alignment.sh  
 
 ### This job calls the script call_mergeUnsorted_dedup_files_for_methExtraction.sh, which further calls the script mergeUnsorted_dedup_files_for_methExtraction.sh
-#bsub -We 24:00 -q priority -J "Deduplication and methylation calling" -o $OUTPUT_DIR/${JOB_PREFIX}_deduplication_methylationCall_main.out $RUN_PATH/call_mergeUnsorted_dedup_files_for_methExtraction.sh
+bsub -We 24:00 -q priority -J "Deduplication and methylation calling" -o $OUTPUT_DIR/${JOB_PREFIX}_deduplication_methylationCall_main.out $RUN_PATH/call_mergeUnsorted_dedup_files_for_methExtraction.sh
 
 ### This job calls the script call_sort_for_coverage.sh, which further calls the sort_for_coverage.sh: 
-#bsub -We 24:00 -q priority -J "Coverage metrics" -o $OUTPUT_DIR/${JOB_PREFIX}_coverage_metrics_main.out $RUN_PATH/call_sort_for_coverage.sh
+bsub -We 24:00 -q priority -J "Coverage metrics" -o $OUTPUT_DIR/${JOB_PREFIX}_coverage_metrics_main.out $RUN_PATH/call_sort_for_coverage.sh
 
 
 
